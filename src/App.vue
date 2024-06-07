@@ -1,5 +1,9 @@
 <template>
-  <Contador></Contador>
+  <!-- <Contador></Contador> puedo abreviarlo-->
+  <img alt="Vue logo" src="./assets/logo.png">
+  <Contador titulo="Estudiante" /> <!-- Accedo a props desde componente padre -->
+  <Contador titulo="Profesor" />
+  <Contador />
 </template>
 
 <script>
