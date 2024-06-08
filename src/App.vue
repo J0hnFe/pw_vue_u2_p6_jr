@@ -1,9 +1,10 @@
 <template>
   <!-- <Contador></Contador> puedo abreviarlo-->
   <img alt="Vue logo" src="./assets/logo.png">
-  <Contador titulo="Estudiante" /> <!-- Accedo a props desde componente padre -->
+  <Contador titulo="Estudiante" :num="-1" /> <!-- Accedo a props desde componente padre -->
   <Contador titulo="Profesor" />
-  <Contador />
+  <!-- <Contador v-bind:num="calcularValor()" /> -->
+  <Contador :num="calcularValor()" /> <!-- Otra forma de v-bind -->
 </template>
 
 <script>
@@ -14,6 +15,12 @@ export default {
   components: {
     Contador,
   },
+
+  methods: {
+    calcularValor() {
+      return 10 + 2;
+    }
+  }
 };
 </script>
 

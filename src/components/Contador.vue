@@ -17,12 +17,26 @@
 <script>
 export default {
     // Props
-    props: ['titulo', 'num'], //pueden haber varias props, una "variable"
+    // 1ra Forma - basica
+    // props: ['titulo', 'num'], //pueden haber varias props, una "variable"
+
+    // 2da forma
+    props: {
+        titulo: String,
+        num: {
+            type: Number,
+            required: false,
+            default: 10,
+            validator(value) {
+                return value > 0;
+            },
+        },
+    },
 
     // Options api para propiedades reactivas
     data() {
         return {
-            numero: 5,
+            numero: this.num,
         };
     },
 
@@ -54,7 +68,7 @@ export default {
         },
 
         presentar() {
-            if(this.titulo !== undefined) {
+            if (this.titulo !== undefined) {
                 return this.titulo
             } else {
                 return 'txt necesario'
