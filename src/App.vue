@@ -1,19 +1,15 @@
 <template>
-  <!-- <Contador></Contador> puedo abreviarlo-->
-  <img alt="Vue logo" src="./assets/logo.png">
-  <Contador titulo="Estudiante" :num="-1" /> <!-- Accedo a props desde componente padre -->
-  <Contador titulo="Profesor" />
-  <!-- <Contador v-bind:num="calcularValor()" /> -->
-  <Contador :num="calcularValor()" /> <!-- Otra forma de v-bind -->
+  <img alt= "Vue logo" src="./assets/logo.png">
+  <Pregunta />
 </template>
 
 <script>
-import Contador from "./components/Contador.vue";
+import Pregunta from "./components/Pregunta.vue";
 
 export default {
   name: "App",
   components: {
-    Contador,
+    Pregunta,
   },
 
   methods: {
