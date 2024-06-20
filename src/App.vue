@@ -1,15 +1,14 @@
 <template>
-  <img alt= "Vue logo" src="./assets/logo.png">
-  <Pregunta />
+  <PokemonPage />
 </template>
 
 <script>
-import Pregunta from "./components/Pregunta.vue";
+import PokemonPage from "./pages/PokemonPage.vue";
 
 export default {
   name: "App",
   components: {
-    Pregunta,
+    PokemonPage,
   },
 
   methods: {

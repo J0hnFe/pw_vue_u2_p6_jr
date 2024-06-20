@@ -1,8 +1,5 @@
 <template>
-    <img  v-if="img"
-    alt="lol image" 
-    v-bind:src="img"
-    />
+    <img v-if="img" alt="lol image" v-bind:src="img" />
 
     <div class="oscuro">
 
@@ -12,18 +9,16 @@
                 Recuerda terminar la pregunta con "?"
             </p>
 
-            <div class="respuesta">
+            <div v-show="mensaje" class="respuesta">
                 <h2>
                     {{ pregunta }}
                 </h2>
                 <h1>
-                    {{ respuesta }}
+                    {{ respuesta === 'yes' ? 'Si' : 'No' }}
                 </h1>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -32,19 +27,21 @@ export default {
         return {
             pregunta: null,
             respuesta: null,
-            img: null
+            img: null,
+            mensaje: false
         }
     },
 
     // Watcher. Es una opcion de option api
     watch: {
         pregunta(value, oldValue) {
+            this.mensaje = false
             console.log({ value, oldValue });
             if (!value.includes('?')) return;
 
             // Consumir API para obtener respuesta
             this.obtenerRespuesta();
-
+            this.mensaje = true;
         }
     },
 
@@ -53,9 +50,9 @@ export default {
             this.respuesta = "Pensando... 🤔"
             const data = await fetch('https://yesno.wtf/api').then(resp => resp.json());
             console.log(data)
-            const {answer, forced, image} = data
+            const { answer, forced, image } = data
             console.log(answer)
-            this.respuesta=answer
+            this.respuesta = answer
             this.img = image;
             return data
         },
@@ -67,7 +64,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 img,
 .oscuro {
     max-height: 100%;
