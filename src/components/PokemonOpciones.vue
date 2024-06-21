@@ -1,25 +1,19 @@
 <template>
     <div class="opciones-container">
         <ul>
-            <li>
-                1
-            </li>
-            <li>
-                2
-            </li>
-            <li>
-                3
-            </li>
-            <li>
-                4
-            </li>
+            <li v-for="p in poke" :key = "p.id">{{ p.name }}</li>
         </ul>
     </div>
 </template>
 
 <script>
 export default {
-
+    props: {
+        poke: {
+            type: Array,
+            required: true,
+        }
+    }
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
 <div class="pokemon-container">
-    <img v-show="mostrar"
-   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/487.svg" alt="Error en la imagen"/>
+    <img v-show="mostrarPokemon"
+   :src ="imagenSrc" alt="Error en la imagen"/>
   
-  <img v-show="!mostrar"
+  <img v-show="!mostrarPokemon"
   class="oculta-pokemon"
-  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/487.svg" alt="Error en la imagen"/>
+  :src ="imagenSrc" alt="Error en la imagen"/>
 </div>
 </template>
 
@@ -13,9 +13,30 @@
 export default {
     data () {
         return {
-            mostrar: true,
+            //526
+            // mostrar: false,
+            // idPokemon: 526,
         };
     },
+
+    props: {
+        idPokemon: {
+            type: Number,
+            required: true,
+        },
+
+        mostrarPokemon: {
+            type: Boolean,
+            required: true,
+            default: false,
+        }
+    },
+
+    computed: {
+        imagenSrc() {
+            return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.idPokemon}.svg`
+        }
+    }
 }
 </script>
 
@@ -27,13 +48,13 @@ export default {
 img {
     height: 400px;
     width: 400px;
-    right: 40%;
+    right: 35%;
     position: absolute;
 }
 
 .pokemon-container {
     height:400px;
-    background-color: rgb(227, 156, 105);
+    background-color: rgb(240, 213, 194);
 }
 
 </style>
