@@ -1,16 +1,18 @@
 <template>
-    <h1>Selecciona el pokemon correcto:</h1>
-    <PokemonImagen :idPokemon="526" :mostrarPokemon="true"/>
-    <PokemonOpciones :poke="arreglo"/>
+    <h1 v-if="!pokemonCorrecto">Por favor espere...</h1>
+    <div v-else>
+        <h1>Selecciona el pokemon correcto:</h1>
+        <PokemonImagen :idPokemon="pokemonCorrecto.id" :mostrarPokemon="mostrar" />
+        <PokemonOpciones :pokemons="arreglo" @seleccionPokemon="revisarRespuesta($event)" />
+        <h2 v-if="gano">Felicidades ha ganado</h2>
+
+    </div>
 </template>
 
 <script>
-import PokemonImagen from '../components/PokemonImagen.vue';
-import PokemonOpciones from '../components/PokemonOpciones.vue';
-
-// Cuando hago referencia a un archivo de funciones (no de componentes)
-// uso nombre de funcionalidad q importo
-import obtenerPokeFachada from '../clients/ClientePokemonAPI.js'
+import PokemonImagen from '../components/PokemonImagen'
+import PokemonOpciones from '../components/PokemonOpciones'
+import obtenerPokemonsFachada from "../clients/ClientePokemonAPI.js";
 
 export default {
     components: {
@@ -20,22 +22,37 @@ export default {
 
     methods: {
         async cargaInicial() {
-            const vectorInicial = await obtenerPokeFachada(526);
+            const vectorInicial = await obtenerPokemonsFachada(4);
             this.arreglo = vectorInicial;
+            const indice = Math.floor(Math.random() * 7);
+            this.pokemonCorrecto = this.arreglo[indice];
         },
+
+        revisarRespuesta(dato) {
+            console.log("Se emitio evento desde el hijo");
+            console.log(dato)
+
+            if (dato.ident === this.pokemonCorrecto.id) {
+                this.mostrar = true;
+                this.gano = true;
+                this.arreglo = [this.pokemonCorrecto]
+            } else {
+                console.log("error...")
+            }
+        }
     },
 
-    data () {
+    data() {
         return {
             arreglo: [],
+            pokemonCorrecto: null,
+            mostrar: false,
+            gano: false
         };
     },
-
-    // Cada vez q el componente se "monta" en la pg, se llama el metodo
-    // Metodos del ciclo de vida no necesitan await
     mounted() {
-       this.cargaInicial();
-    }
+        this.cargaInicial(4);
+    },
 };
 </script>
 

@@ -1,44 +1,42 @@
-// Podemos declarar como lambda o como funcion
 
 const obtenerVectorNumerico = (longitud) => {
-    const vector = []
+
+    const vector = [];
     for (let i = 0; i < longitud; i++) {
-        vector[i] = obtenerAleatorio(1, 649);
+        vector[i] = obtenerAleatorio(1, 600)
     }
+    return vector
 }
 
-// Funcionalidad pa numeros aleatorios
 function obtenerAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const obtenerPoke = async (longitud) => {
-    const vector = obtenerVectorNumerico(longitud);
+const obtenerPokemons = async (longitud) => {
     const vectorFinal = [];
+    const vector = obtenerVectorNumerico(longitud);
 
-    for (let i = 0; i < vector.lenght; i++) {
-        vectorFinal[i] = await construirPokemon(vector[i])
+    for (let i = 0; i < vector.length; i++) {
+        vectorFinal[i] = await construirPokemon(vector[i]);
     }
+    return vectorFinal;
 }
 
 async function construirPokemon(identificador) {
-    const data = await consumirApi(identificador);
-
+    const data = await consumirAPI(identificador);
     const obj = {
-        nombre: data.nombre,
+        nombre: data.name,
         id: data.id
     }
-    return obj
+    return obj;
 }
 
-const consumirApi = async (id) => {
-    return await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`).then(r => r.json());
+const consumirAPI = async (id) => {
+    return await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(r => r.json());
 }
 
-// Metodo para no exportar el metodo directo sino usar una "fachada"
-const obtenerPokeFachada= async(longitud) => {
-    return await obtenerPoke(longitud);
+const obtenerPokemonsFachada = async (longitud) => {
+    return await obtenerPokemons(longitud);
 }
 
-export default obtenerPokeFachada
-
+export default obtenerPokemonsFachada
