@@ -28,10 +28,15 @@ export default {
 .opciones-container {
     display: flex;
     justify-content: center;
+    margin-top: 450px
 }
 
 ul {
     list-style-type: none;
+    padding: 0; /* Elimina el padding por defecto */
+    display: flex; /* Establezco ul como un contenedor flex */
+    flex-direction: column; /* Organizo elementos li verticalmente */
+    align-items: center; /* Centro elementos li horizontalmente */
 }
 
 li {

@@ -10,9 +10,9 @@ export default {
     data() {
         return {
             mostrar: true,
-
         };
     },
+
     props: {
         idPokemon: {
             type: Number,
@@ -23,10 +23,10 @@ export default {
             required: true,
         }
     },
+
     computed: {
         imagenSrc() {
-            return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.idPokemon}.svg`
-                ;
+            return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.idPokemon}.svg`;
         },
     },
 };
@@ -40,12 +40,15 @@ export default {
 img {
     height: 400px;
     width: 400px;
-    right: 40%;
-    position: absolute;
 }
 
 .pokemon-container {
     height: 400px;
-    background-color: rgb(166, 229, 166);
+    width: 400px;
+    left: 50%;
+    padding: 10px;
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: rgb(246, 255, 182);
 }
 </style>
